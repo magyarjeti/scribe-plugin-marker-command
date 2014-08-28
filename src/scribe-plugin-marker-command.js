@@ -1,5 +1,11 @@
+import Element from 'scribe-common/src/element';
+
 export default function() {
     return function(scribe) {
+        var getContainingMark = function(selection) {
+            return selection.getContaining(function(node) { return node.nodeName === 'MARK'; });
+        };
+
         var markerCommand = new scribe.api.Command('formatBlock');
         markerCommand.nodeName = 'MARK';
 
@@ -7,21 +13,20 @@ export default function() {
             var selection = new scribe.api.Selection();
             var range = selection.range;
 
-                selection.placeMarkers();
+            selection.placeMarkers();
             if (!this.queryState()) {
-                var wrapper = document.createElement("mark");
+                var wrapper = document.createElement('mark');
                 range.surroundContents(wrapper);
             } else {
-                console.log(range);
+                var markerNode = getContainingMark(selection);
+                Element.unwrap(markerNode.parentNode, markerNode);
             }
         };
 
         markerCommand.queryState = function() {
             var selection = new scribe.api.Selection();
-            var range = selection.range;
 
-            return range.commonAncestorContainer.nodeName === this.nodeName
-                || range.commonAncestorContainer.parentNode.nodeName === this.nodeName;
+            return !!getContainingMark(selection);
         };
 
         scribe.commands.marker = markerCommand;
