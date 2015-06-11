@@ -1,4 +1,4 @@
-define("scribe-plugin-marker-command", ['scribe-common/src/element'], function($__0) {
+define("scribe-plugin-marker-command", ['element'], function($__0) {
   "use strict";
   var __moduleName = "scribe-plugin-marker-command";
   if (!$__0 || !$__0.__esModule)
