@@ -1,9 +1,6 @@
-define("scribe-plugin-marker-command", ['element'], function($__0) {
+define("scribe-plugin-marker-command", [], function() {
   "use strict";
   var __moduleName = "scribe-plugin-marker-command";
-  if (!$__0 || !$__0.__esModule)
-    $__0 = {default: $__0};
-  var Element = $__0.default;
   var $__default = function() {
     return function(scribe) {
       var getContainingMark = function(selection) {
@@ -22,7 +19,7 @@ define("scribe-plugin-marker-command", ['element'], function($__0) {
           range.surroundContents(wrapper);
         } else {
           var markerNode = getContainingMark(selection);
-          Element.unwrap(markerNode.parentNode, markerNode);
+          scribe.node.unwrap(markerNode.parentNode, markerNode);
         }
       };
       markerCommand.queryState = function() {
