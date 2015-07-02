@@ -1,5 +1,3 @@
-import Element from 'element';
-
 export default function() {
     return function(scribe) {
         var getContainingMark = function(selection) {
@@ -19,7 +17,7 @@ export default function() {
                 range.surroundContents(wrapper);
             } else {
                 var markerNode = getContainingMark(selection);
-                Element.unwrap(markerNode.parentNode, markerNode);
+                scribe.node.unwrap(markerNode.parentNode, markerNode);
             }
         };
 
